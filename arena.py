@@ -1,6 +1,4 @@
-
 from abc import ABC, abstractmethod
-
 class Weapon:
     def __init__(self, name, damage):
         self.name = name
@@ -11,16 +9,15 @@ class Fighter(ABC):
         self.name = name
         self.__health = health
         self.weapon = weapon
-
     def take_damage(self, amount):
         self.__health -= amount
         print(f"{self.name} took {amount} Damage, current health: {self.__health}")
-
     @abstractmethod
     def attack(self, opponent):
         pass
-
-    def get_health(self):
+    @property
+    def health(self):
+        """This is a 'Getter' property"""
         return self.__health
 
 class Warrior(Fighter):
@@ -35,27 +32,22 @@ class Mage(Fighter):
         opponent.take_damage(massMove)
 
 if __name__ == "__main__":
-
     BloodReaper = Weapon("Blood reaper", 12)
     GhostKnife = Weapon("Ghost knife", 8)
-
+    
     arthur = Warrior("Arthur", 50, GhostKnife)
     merlin = Mage("Merlin", 60, BloodReaper)
 
     print("--- THE BATTLE BEGINS ---")
     print(f"---Arthur vs Merlin---")
-    print(f"Initial health\nArthur: {arthur.get_health()}\nMerlin: {merlin.get_health()} ")
-    while arthur.get_health() > 0 and merlin.get_health() > 0:
+    print(f"Initial health\nArthur: {arthur.health}\nMerlin: {merlin.health} ")
+    while arthur.health > 0 and merlin.health > 0:
         arthur.attack(merlin)
-        if merlin.get_health() <= 0:
+        if merlin.health <= 0:
             print(f"\n🏆 {arthur.name} is Victorious! ")
             break
             
         merlin.attack(arthur)
-        if arthur.get_health() <= 0:
+        if arthur.health <= 0:
             print(f"\n🏆 {merlin.name} is Victorious!")
             break
-        
-
-
-        
