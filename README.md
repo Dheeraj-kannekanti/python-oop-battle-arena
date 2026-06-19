@@ -31,5 +31,4 @@ A terminal-based combat simulation designed to demonstrate the core pillars of *
    
 4. Navigate to folder : cd python-oop-battle-arena
 5. Run the script : python arena.py
-6. 
-7. 
+   
